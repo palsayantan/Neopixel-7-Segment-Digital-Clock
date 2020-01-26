@@ -26,8 +26,8 @@ Adafruit_NeoPixel strip = Adafruit_NeoPixel((PIXEL_PER_SEGMENT * 7 * PIXEL_DIGIT
 DHT dht(DHT_PIN, DHT_TYPE);
 
 // set Wi-Fi SSID and password
-const char *ssid     = "Sayantan";
-const char *password = "sayantan";
+const char *ssid     = "SSID";
+const char *password = "PASSWORD";
 
 WiFiUDP ntpUDP;
 // 'time.nist.gov' is used (default server) with +1 hour offset (3600 seconds) 60 seconds (60000 milliseconds) update interval
