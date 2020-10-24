@@ -12,7 +12,7 @@
 
 #define LDR_PIN       A0    // LDR pin
 #define BUTTON_PIN    12    // Button pin
-
+ 
 #define TIME_FORMAT        12    // 12 = 12 hours format || 24 = 24 hours format 
 
 Adafruit_NeoPixel strip = Adafruit_NeoPixel((PIXEL_PER_SEGMENT * 7 * PIXEL_DIGITS) + (PIXEL_DASH * 2), PIXEL_PIN, NEO_GRB + NEO_KHZ800);
