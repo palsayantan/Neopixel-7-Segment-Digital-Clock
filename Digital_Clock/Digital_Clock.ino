@@ -18,8 +18,8 @@
 Adafruit_NeoPixel strip = Adafruit_NeoPixel((PIXEL_PER_SEGMENT * 7 * PIXEL_DIGITS) + (PIXEL_DASH * 2), PIXEL_PIN, NEO_GRB + NEO_KHZ800);
 
 // set Wi-Fi SSID and password
-const char *ssid     = "Sayantan";
-const char *password = "SayantaN";
+const char *ssid     = "SSID";
+const char *password = "PASSWORD";
 
 RTC_DS3231 rtc;
 
@@ -29,9 +29,9 @@ int brightness_threshold = 50;
 
 WiFiUDP ntpUDP;
 // 'time.nist.gov' is used (default server) with +1 hour offset (3600 seconds) 60 seconds (60000 milliseconds) update interval
-NTPClient timeClient(ntpUDP, "time.nist.gov", 19800, 60000); //GMT+5:30 : 5*3600+30*60=19800
+NTPClient timeClient(ntpUDP, "time.nist.gov", 19800, 60000); // GMT calculation >> GMT+5:30 : (5*3600)+(30*60) = 19800
 
-int period = 30000;     // Color changing interval
+int period = 30000;     // screen update interval
 unsigned long time_now = -30000;
 int Second, Minute, Hour;
 
@@ -137,14 +137,19 @@ void loop() {
     Minute = now.minute();
     Hour  = now.hour();
 
-    if (Hour >= 13) {
-      Hour = Hour - 12;
+    if (TIME_FORMAT == 12) {
+      if (Hour >= 13) {
+        Hour = Hour - 12;
+      }
+      if (Hour == 00) {
+        Hour = 12;
+      }
+      else
+        Hour = Hour;
     }
-    if (Hour == 00) {
-      Hour = 12;
-    }
-    else
+    else if (TIME_FORMAT == 24) {
       Hour = Hour;
+    }
 
     uint32_t sensor_val = analogRead(LDR_PIN);
     if (sensor_val < brightness_threshold) {
